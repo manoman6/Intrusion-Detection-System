@@ -1,0 +1,7 @@
+.venv/
+MachineLearningCVE/
+.DS_Store
+.idea/
+__pycache__/
+
+combined_dataset.csv

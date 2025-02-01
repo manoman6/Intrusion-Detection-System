@@ -1,0 +1,2 @@
+# An Intrustion Detection System Built on Python For Real Time Deployment
+I am developing this IDS using the CIC IDS 2017 dataset. Firstly I am creating a neural network, which will then be used to detect live traffic being captured. 
