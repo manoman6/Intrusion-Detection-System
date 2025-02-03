@@ -137,7 +137,16 @@ def preprocess_dataframe(df):
     print('the sum of null values in flow bytes and pakcets after removing them: ')
     print(df.loc[dos_hulk_mask, columns_to_check].isna().sum())
 
-####handle the inf values
+    ###rechecks how many nan values there are after removing those attached to dos hulk attacks
+    rows_with_nan_specific_posthulk = df[df.isna().any(axis=1)]
+    nan_attack_types_posthulk = rows_with_nan_specific_posthulk['Label-Mappings'].value_counts().sort_index()
+    print("occurance count for each attack type in the nan dataset after removing those attached to DOS Hulk attacks: ")
+    print(nan_attack_types_posthulk)
+    ### only 409 records still contain null values, and they are all normal traffic, I will drop these records
+
+    df.dropna(inplace=True)
+
+    ####handle the inf values
     for col in df:
         finite_values = df[col][np.isfinite(df[col])]
 
@@ -154,6 +163,13 @@ def preprocess_dataframe(df):
     for col in df:
         num_infs = np.isinf(df[col]).sum()
         print(f"Column '{col}' still has {num_infs} infinite values.")
+
+    print("\nAre there any null values in the data set (true is yes): ")
+    isnan = np.isnan(df).any()
+    print(isnan)
+    print("\n Are there any inf values in the data set (true is yes): ")
+    isinf = np.isinf(df).any()
+    print(isinf)
 
 
 
