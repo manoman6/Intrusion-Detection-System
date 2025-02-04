@@ -121,6 +121,10 @@ def preprocess_dataframe(df):
     print("occurance count for each attack type in the nan dataset: ")
     print(nan_attack_types)
 
+    print("\n Checking how many label mappings there are: ")
+    unique_labels_mappings_prior = df['Label-Mappings'].unique()
+    print(unique_labels_mappings_prior)
+
     ###############I have determined that there is too much significance between null and inf values tied to DOS hulk attacks, so i will clip the values######
 
     #handle the nan values associated with dos hulk attacks, since a majority of nan values are on dos hulk, i will use their upper threshold calc, but the general one oon inf values
@@ -146,8 +150,16 @@ def preprocess_dataframe(df):
 
     df.dropna(inplace=True)
 
+
+    print("\n Checking how many label mappings there are: ")
+    unique_labels_mappings_post = df['Label-Mappings'].unique()
+    print(unique_labels_mappings_post)
+
     ####handle the inf values
     for col in df:
+        if col == 'Label-Mappings':
+            continue
+
         finite_values = df[col][np.isfinite(df[col])]
 
         if not finite_values.empty:
@@ -170,6 +182,10 @@ def preprocess_dataframe(df):
     print("\n Are there any inf values in the data set (true is yes): ")
     isinf = np.isinf(df).any()
     print(isinf)
+
+    print("\n Checking how many label mappings there are: ")
+    unique_labels_mappings_last = df['Label-Mappings'].unique()
+    print(unique_labels_mappings_last)
 
 
 
