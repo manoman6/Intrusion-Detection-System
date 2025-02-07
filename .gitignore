@@ -5,3 +5,5 @@ MachineLearningCVE/
 __pycache__/
 
 combined_dataset.csv
+networkdata/
+Tuesday-WorkingHours.pcap.download/
